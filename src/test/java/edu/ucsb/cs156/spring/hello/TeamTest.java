@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+import java.beans.Transient;
 import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -56,6 +57,29 @@ public class TeamTest {
         differentTeam.addMember("member3"); 
         differentTeam.addMember("member4"); 
         assertFalse(team.equals(differentTeam));
+    }
+
+    @Test
+    public void hash_testing()
+    {
+        Team t1 = new Team();
+        t1.setName("foo");
+        t1.addMember("bar");
+        Team t2 = new Team();
+        t2.setName("foo");
+        t2.addMember("bar");
+        assertEquals(t1.hashCode(), t2.hashCode());
+    }
+    
+    @Test 
+    public void hash_expected()
+    {
+        Team t = new Team();
+        t.setName("foo");
+        t.addMember("bar");
+        int result = t.hashCode();
+        int expectedResult = 130294;
+        assertEquals(expectedResult, result);
     }
 
 }
