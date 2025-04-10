@@ -51,12 +51,15 @@ public class TeamTest {
         Object obj = new Object();
         assertFalse(teamA.equals(obj));
 
-        Team differentTeam = new Team("differentTeam"); 
-        assertFalse(teamA.equals(differentTeam));
+        Team differentName = new Team("differentName"); 
+        differentName.addMember("member1"); 
+        differentName.addMember("member2"); 
+        assertFalse(teamA.equals(differentName));
 
-        differentTeam.addMember("member3"); 
-        differentTeam.addMember("member4"); 
-        assertFalse(team.equals(differentTeam));
+        Team differentMember = new Team("TeamA"); 
+        differentMember.addMember("member3"); 
+        differentMember.addMember("member4"); 
+        assertFalse(team.equals(differentMember));
     }
 
     @Test
