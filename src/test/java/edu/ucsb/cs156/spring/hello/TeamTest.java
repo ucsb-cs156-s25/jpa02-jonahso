@@ -37,29 +37,46 @@ public class TeamTest {
     public void same_equals_correct() 
     {
         Team teamA = new Team("TeamA");
+        assertEquals(true, teamA.equals(teamA)); 
+
+        // Same name, same member
+        Team sameteam = new Team("TeamA");
+        assertEquals(true, teamA.equals(sameteam)); 
+
+        // Different name, same member 
+        Team differentName = new Team("differentName"); 
+        assertEquals(false, teamA.equals(differentName)); 
+
+        // Same name, different member 
+        Team differentMember = new Team("TeamA"); 
+        assertEquals(true, teamA.equals(differentMember)); 
+
+        // Different name, different member 
+        Team different = new Team("differentName"); 
+        assertEquals(false, teamA.equals(different)); 
+
         teamA.addMember("member1"); 
         teamA.addMember("member2"); 
-        assertTrue(teamA.equals(teamA));
-        
-        Team sameteam = new Team("TeamA");
+        assertEquals(true, teamA.equals(teamA));
+
         sameteam.addMember("member1"); 
         sameteam.addMember("member2"); 
+        assertEquals(true, teamA.equals(sameteam));
 
-        assertTrue(teamA.equals(sameteam));
-        assertTrue(sameteam.equals(teamA));
-        
-        Object obj = new Object();
-        assertFalse(teamA.equals(obj));
-
-        Team differentName = new Team("differentName"); 
         differentName.addMember("member1"); 
         differentName.addMember("member2"); 
-        assertFalse(teamA.equals(differentName));
-
-        Team differentMember = new Team("TeamA"); 
+        assertEquals(false, teamA.equals(differentName));
+        
         differentMember.addMember("member3"); 
         differentMember.addMember("member4"); 
-        assertFalse(team.equals(differentMember));
+        assertEquals(false, teamA.equals(differentMember));
+
+        different.addMember("member3"); 
+        different.addMember("member4"); 
+        assertEquals(false, teamA.equals(different));
+
+        String obj = "not a team"; 
+        assertEquals(false, teamA.equals(obj));
     }
 
     @Test
